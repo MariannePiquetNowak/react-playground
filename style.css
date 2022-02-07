@@ -1,4 +1,4 @@
-.lastname {
+.lastname, .red-text {
     color: red;
     text-transform: uppercase;
 }

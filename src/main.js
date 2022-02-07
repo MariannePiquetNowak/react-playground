@@ -1,4 +1,33 @@
-function strUcFirst(a){return (a+'').charAt(0).toUpperCase()+a.substr(1);}
+/*
+  CORRECTION
+*/
+
+const lastName = "Piquet-Nowak";
+const firstName = "Marianne";
+
+const formatLastName = (value) => {
+  return value[0];
+  toUpperCase() + value.slice(1);
+};
+
+const formatFirstName = (value) => {
+  return value.toUpperCase();
+};
+
+const helloWorld = (
+  <h1>
+    Hello <span>{formatFirstName(firstName)} </span>{" "}
+    <span className="red-text">{formatLastName(lastName)}</span>
+  </h1>
+);
+
+
+/*
+    EXERCICE SOLO BONUS
+*/
+function strUcFirst(a) {
+  return (a + "").charAt(0).toUpperCase() + a.substr(1);
+}
 
 function formatComponent(user) {
   return (
@@ -7,22 +36,20 @@ function formatComponent(user) {
       <span className="firstname">{strUcFirst(user.firstName)} </span>
       <span className="lastname">{user.lastName}</span>
     </div>
-  )
+  );
 }
 
 const user = {
   firstName: "Emmanuel",
   lastName: "Macron",
-  text: "Nous sommes en guerre"
-}
+  text: "Nous sommes en guerre",
+};
+
+const component = <section>{formatComponent(user)}</section>;
 
 
-const component = (
-  <section>
-    {formatComponent(user)}
-  </section>
-);
-
+/*
+    EXERCICE SOLO
 
 // const firstName = "Emmanuel";
 // const lastName = "Macron";
@@ -38,5 +65,4 @@ const component = (
 //   </div>
 // )
 
-
-ReactDOM.render(component, document.querySelector("#app"));
+ReactDOM.render(helloWorld, document.querySelector("#app"));
