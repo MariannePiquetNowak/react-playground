@@ -1,12 +1,28 @@
 console.log('coucou');
 
-var helloWorld = React.createElement('h1', {}, 'Hello world!');
+// const helloWorld = React.createElement('h1', {}, 'Hello world!');
+
+var user = {
+    firstname: "Macron",
+    img: "https://c.tenor.com/ErLfR9QlfVkAAAAd/macron-guerre.gif"
+};
+
+var el = React.createElement(
+    "div",
+    null,
+    React.createElement(
+        "h1",
+        null,
+        "Hello World ",
+        user.firstname
+    ),
+    React.createElement("img", { src: user.img })
+);
 
 // mauvaise pratique
-
 
 //ReactDOM.render(helloWorld, document.body);
 
 // Meilleure pratique mais pas encore LA meilleure
 
-ReactDOM.render(helloWorld, document.querySelector('#app'));
+ReactDOM.render(el, document.querySelector('#app'));
