@@ -5,7 +5,7 @@ function formatComponent(user) {
     <div>
       <h1>{user.text}</h1>
       <span className="firstname">{strUcFirst(user.firstName)} </span>
-      <span className="lastname">{user.lastName.toUpperCase()}</span>
+      <span className="lastname">{user.lastName}</span>
     </div>
   )
 }
@@ -38,6 +38,5 @@ const component = (
 //   </div>
 // )
 
-console.log(component)
 
 ReactDOM.render(component, document.querySelector("#app"));

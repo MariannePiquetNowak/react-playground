@@ -20,7 +20,7 @@ function formatComponent(user) {
     React.createElement(
       "span",
       { className: "lastname" },
-      user.lastName.toUpperCase()
+      user.lastName
     )
   );
 }
@@ -51,6 +51,5 @@ var component = React.createElement(
 //   </div>
 // )
 
-console.log(component);
 
 ReactDOM.render(component, document.querySelector("#app"));
