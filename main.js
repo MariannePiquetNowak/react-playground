@@ -1,6 +1,10 @@
 var firstName = "Emmanuel";
 var lastName = "Macron";
+
 // const helloWorld = React.createElement("h1", {}, "Hello world!");
+function strUcFirst(a) {
+    return (a + '').charAt(0).toUpperCase() + a.substr(1);
+}
 
 var hello = React.createElement(
     "div",
@@ -13,7 +17,7 @@ var hello = React.createElement(
     React.createElement(
         "span",
         { className: "firstname" },
-        firstName.toLowerCase(),
+        strUcFirst(firstName),
         " "
     ),
     React.createElement(
