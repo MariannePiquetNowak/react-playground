@@ -27,4 +27,6 @@ var hello = React.createElement(
     )
 );
 
+console.log(hello);
+
 ReactDOM.render(hello, document.querySelector("#app"));

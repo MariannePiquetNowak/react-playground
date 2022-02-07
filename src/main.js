@@ -12,5 +12,7 @@ const hello = (
   </div>
 )
 
+console.log(hello)
+
 
 ReactDOM.render(hello, document.querySelector("#app"));
