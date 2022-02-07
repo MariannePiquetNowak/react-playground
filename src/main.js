@@ -1,6 +1,8 @@
-console.log('coucou');
+console.log('coucou'); 
 
-var helloWorld = React.createElement('h1', {}, 'Hello world!');
+
+const helloWorld = React.createElement('h1', {}, 'Hello world!');
+
 
 // mauvaise pratique
 
