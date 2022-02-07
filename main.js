@@ -1,6 +1,7 @@
-
+/*
 const firstName = 'r0ulito';
 const lastName = 'formateur';
+*/
 
 function FirstName(props) {
 
@@ -43,4 +44,22 @@ class HelloWorld extends React.Component {
  * FUNCTIONNAL COMPONENT
  */
 
-ReactDOM.render(<HelloWorld />, document.querySelector('#app'));
+const HelloWorldTwo = () => {
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+
+    React.useEffect(() => {
+        setFirstName("Marianne");
+        setLastName('Piquet');
+    }, []);
+
+    return (
+        <h1>
+            Hello{" "}
+            <FirstName text={firstName.concat(" ")}/>
+            <LastName text={lastName}/>
+        </h1>
+    )
+}
+
+ReactDOM.render(<HelloWorldTwo />, document.querySelector('#app'));
