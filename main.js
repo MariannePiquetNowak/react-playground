@@ -15,9 +15,17 @@ var helloWorld = React.createElement('h1', {}, 'Hello world!');
 // Solution sans bonus
 // const helloWorld = <h1>Hello <span>{firstName[0].toUpperCase() + firstName.slice(1)}</span> <span className="red-text">{lastName.toUpperCase()}</span></h1>;
 
-function FirstName(props) {
+function Span(props) {
     return React.createElement(
         'span',
+        null,
+        props.children
+    );
+}
+
+function FirstName(props) {
+    return React.createElement(
+        Span,
         null,
         props.name[0].toUpperCase() + props.name.slice(1),
         ' '
@@ -26,7 +34,7 @@ function FirstName(props) {
 
 function LastName(props) {
     return React.createElement(
-        'span',
+        Span,
         { className: props.className },
         props.name
     );
