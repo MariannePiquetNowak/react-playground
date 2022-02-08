@@ -1,7 +1,7 @@
 
 # [Les événements](https://fr.reactjs.org/docs/handling-events.html)
 
-En HTML on on passe une fonction sous forme de chaîne de caractères
+En HTML on passe une fonction sous forme de chaîne de caractères
 
 ```html
 <button onclick="triggerConnect()">
