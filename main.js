@@ -3,6 +3,10 @@ const firstName = 'r0ulito';
 const lastName = 'formateur';
 */
 
+/**
+ * L'exercice est caduc car j'avais mal compris la consigne, j'ai récupéré le code de l'exo d'avant plutot que le code d'exemple
+ */
+
 function FirstName(props) {
 
     return <span>{props.text[0].toUpperCase() + props.text.substr(1)}</span>
