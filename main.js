@@ -159,20 +159,18 @@ function ClockBonus(props) {
 
   React.useEffect(() => {
     tick();
-  }, [date]);
+  }, [date])
 
   const [date, setDate] = React.useState(new Date());
+  const ref = React.useRef();
 
   const handleClickStop = (value) => {
-    setTimeout(tick());
-  }
-  
-  const handleClickGo = (value) => {
-    
+    clearInterval(ref.current);
   }
 
+
   const tick = () => {
-    setInterval(() => {
+    ref.current = setInterval(() => {
       setDate(new Date());
     }, 1000);
   };
@@ -188,7 +186,7 @@ function ClockBonus(props) {
       />
       <Button
         class="btn black"
-        click={handleClickGo}
+        click={() => tick()}
         text="Reprise"
       />
     </div>
