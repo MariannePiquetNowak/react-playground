@@ -141,4 +141,58 @@ function Clock(props) {
   );
 }
 
-ReactDOM.render(<Clock />, document.querySelector("#app"));
+/**
+ * BONUS
+ */
+
+
+ function Button(props) {
+  return (
+    <button className={props.class} onClick={props.click}>
+      {props.text}
+    </button>
+  );
+}
+
+function ClockBonus(props) {
+
+
+  React.useEffect(() => {
+    tick();
+  }, [date]);
+
+  const [date, setDate] = React.useState(new Date());
+
+  const handleClickStop = (value) => {
+    setTimeout(tick());
+  }
+  
+  const handleClickGo = (value) => {
+    
+  }
+
+  const tick = () => {
+    setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+  };
+
+  return (
+    <div>
+      <h1>Hello world</h1>
+      <h2>Il est {date.toLocaleTimeString()}.</h2>
+      <Button
+        class="btn random"
+        click={handleClickStop}
+        text="Arrêt"
+      />
+      <Button
+        class="btn black"
+        click={handleClickGo}
+        text="Reprise"
+      />
+    </div>
+  );
+}
+
+ReactDOM.render(<ClockBonus />, document.querySelector("#app"));
