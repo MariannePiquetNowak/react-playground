@@ -15,7 +15,6 @@ ReactDOM.render(<Clock date={new Date()}/>, document.querySelector('#app'));
 
 */
 
-
 /* 
 
 // Étape 2
@@ -39,8 +38,6 @@ ReactDOM.render(<Clock />, document.querySelector('#app'));
 
 
  */
-
-
 
 // Étape 3
 
@@ -74,34 +71,74 @@ ReactDOM.render(<Clock />, document.querySelector('#app'));
 }
 
 ReactDOM.render(<Clock />, document.querySelector('#app'));  */
-
-
-function Clock(props) {
-    React.useEffect(() => {
-        tick();        
-    }, []);
-    
-    const [date, setDate] = React.useState(new Date());
-
-    const tick = () => {
-        setInterval(() => {
-            setDate(new Date())
-        }, 1000)
-    }
-    
-
-    return (
-        <div>
-            <h1>Hello world</h1>
-            <h2>Il est {date.toLocaleTimeString()}.</h2>
-        </div>
-        );
+function Button(props) {
+  return (
+    <button className={props.class} onClick={props.click}>
+      {props.text}
+    </button>
+  );
 }
 
-ReactDOM.render(<Clock />, document.querySelector('#app'));
+function Clock(props) {
 
+  React.useEffect(() => {
+    handleClickBlack();
+    handleClickRandom();
+  }, []);
 
+  React.useEffect(() => {
+    tick();
+  }, []);
 
+  const [date, setDate] = React.useState(new Date());
 
+  const [black, setBlack] = React.useState("");
+  const [random, setRandom] = React.useState(null);
 
+  const handleClickBlack = () => {
+    const title = document.querySelector("h2");
+    setBlack("black");
+    title.style.color = black;
+  };
 
+  const handleClickRandom = () => {
+    const title = document.querySelector("h2");
+    setRandom(getRandomColor())
+    title.style.color = random;
+    
+  };
+
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  const tick = () => {
+    setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+  };
+
+  return (
+    <div>
+      <h1>Hello world</h1>
+      <h2>Il est {date.toLocaleTimeString()}.</h2>
+      <Button
+        class="btn random"
+        click={handleClickRandom}
+        text="Couleur aléatoire"
+      />
+      <Button
+        class="btn black"
+        click={handleClickBlack}
+        text="Couleur initiale"
+      />
+    </div>
+  );
+}
+
+ReactDOM.render(<Clock />, document.querySelector("#app"));
