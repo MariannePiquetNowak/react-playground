@@ -20,21 +20,69 @@ React.useEffect(() => {
   return (
     <ul>
       {users.map(user => (
-        <li className="container" key={user.id}>
-            <h1>{user.name}</h1>
-            <h4>{user.company.name}</h4>
-        <div style={{width: "100%", display: "flex", justifyContent: "center" }}>
-        <div className="info">
-            <p><span>email:</span> {user.email}</p>
-            <p><span>Phone Number:</span> {user.phone}</p>
-            <p><span>Website :</span> {user.website}</p>
-          </div>
-        </div>
-          
-        </li>
+        <UserCard key={user.id} user={user} />
       ))}
     </ul>
   )
 }
 
+const UserCard = ({user}) => {
+  return (
+    <li className="container">
+      <h1>{user.name}</h1>
+      <h4>{user.company.name}</h4>
+      <div style={{width: "100%", display: "flex", justifyContent: "center" }}>
+        <div className="info">
+            <p><span>email:</span> {user.email}</p>
+            <p><span>Phone Number:</span> {user.phone}</p>
+            <p><span>Website :</span> {user.website}</p>
+        </div>
+      </div>
+    </li>
+  )
+}
+
 ReactDOM.render(<VisitCard />, document.querySelector("#app"));
+
+
+/**
+ * CORRECTION 
+ */
+/*
+ function App(props) {
+  React.useEffect(() => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(usersObject => setUsers(usersObject))
+  }, [])
+
+  const [users, setUsers] = React.useState([]);
+
+
+
+  return(
+      <React.Fragment>
+      {
+          users.map((u) =>(
+              <UserCard key={u.id} user={u}/>
+          ))
+      }
+      </React.Fragment>
+  )
+}
+
+function UserCard({user}) {
+  
+
+  return (
+      <ul className="user-card">
+          <li>{user.name}</li>
+          <li>{user.email}</li>
+          <li>{user.company.name}</li>
+          <li>{user.phone}</li>
+          <li>{user.website}</li>
+      </ul>
+  )
+}
+
+*/
