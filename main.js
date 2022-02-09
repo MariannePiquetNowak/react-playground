@@ -17,6 +17,10 @@ React.useEffect(() => {
   console.log(users) // => Question à Julien : pourquoi ça renvoi un tableau vide ?
 },[])
 
+// React.useEffect(() => {
+//   console.log(users) 
+// },[users])
+
   return (
     <ul>
       {users.map(user => (
