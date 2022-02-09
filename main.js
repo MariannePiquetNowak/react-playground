@@ -1,67 +1,66 @@
 const App = () => {
-  return <React.Fragment>coucou</React.Fragment>;
-};
-
-const NameForm = (props) => {
-  const [value, setValue] = React.useState("");
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    console.log(e.target.value);
-  };
+  const [name, setName] = React.useState('');
+  const [textarea, setTextArea] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
 
   const handleSubmit = (e) => {
-    alert("Le nom a été soumis : " + value);
+    alert(`Le nom a été soumis : ${name} => ${textarea}` );
     e.preventDefault();
+  };
+
+  const handleChange = (e) => {
+	const targetType = e.target.type
+	if(targetType === "text") {
+		setName(e.target.value)
+	} 
+	if(targetType === "textarea") {
+		setTextArea(e.target.value)
+	}
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <NameForm name="input" change={handleChange} value={name}/>
+	  <EssayForm name="textarea" change={handleChange} value={textarea}/>
+	  <input type="submit" value="Envoyer" />
+    </form>
+  );
+};
+
+const NameForm = (props) => {
+  return (
+    <React.Fragment>
       <label>
         Nom :
-        <input type="text" value={value} onChange={handleChange} />
+        <input type="text" value={props.value} onChange={props.change} />
       </label>
-      <input type="submit" value="Envoyer" />
-    </form>
+    </React.Fragment>
   );
 };
 
 const EssayForm = (props) => {
-  const [value, setValue] = React.useState("Écrivez un essai à propos de votre élément du DOM préféré");
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    console.log("Test", e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    alert("Un essai a été envoyé : " + value);
-    e.preventDefault();
-  };
+  
   return (
-    <form onSubmit={handleSubmit}>
+    <React.Fragment>
       <label>
         Essay:
-        <textarea value={value} onChange={handleChange} />
+        <textarea value={props.value} onChange={props.change} />
       </label>
-      <input type="submit" value="Envoyer" />
-    </form>
+    </React.Fragment>
   );
 };
 
 const FlavorForm = (props) => {
-
-  const [value, setValue] = React.useState('coconut');
+  const [value, setValue] = React.useState("coconut");
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(event.target.value)
-  }
+    console.log(event.target.value);
+  };
 
   const handleSubmit = (event) => {
-    alert('Votre parfum favori est : ' + value);
+    alert("Votre parfum favori est : " + value);
     event.preventDefault();
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -79,4 +78,4 @@ const FlavorForm = (props) => {
   );
 };
 
-ReactDOM.render(<FlavorForm />, document.querySelector("#app"));
+ReactDOM.render(<App />, document.querySelector("#app"));
