@@ -5,8 +5,8 @@ const valNumber = {
 
 const App = () => {
 
-  const [decimal, setDecimal] = React.useState("");
-  const [binary, setBinary] = React.useState("");
+  const [decimal, setDecimal] = React.useState('');
+  const [binary, setBinary] = React.useState('');
 
   const convertDecimalToBinary = (decimalNumber) => {
     if(!isNaN(decimalNumber))
@@ -15,9 +15,7 @@ const App = () => {
   }
 
   const handleChange = (e) => {
-    if(isNaN(e.target.value)) {
-      alert("Veuillez rentre un nombre")
-    }
+    if(Number.isNaN(e.target.value)) return
     setDecimal(parseInt(e.target.value));
     setBinary(convertDecimalToBinary(decimal))
   }
@@ -31,8 +29,6 @@ const App = () => {
 }
 
 const BaseNumberInput = (props) => {
-
-  
 
   return (
     <React.Fragment>
