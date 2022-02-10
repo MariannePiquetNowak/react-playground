@@ -1,14 +1,11 @@
-.red-text {
-    color: red;
+.container {
+    background-color: #e7bf3a;
+    width: 200px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    border-radius: 5px;
 }
 
-.user-card {
-    list-style: none;
-    width: 17.5%;
-    display: inline-block;
-    border: 1px teal solid;
-    margin-right: 5px;
-    border-radius: 10px;
-    padding: 15px 20px;
-    box-shadow: 3px 2px 5px teal;
-}

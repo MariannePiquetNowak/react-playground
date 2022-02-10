@@ -1,170 +1,70 @@
 const App = () => {
-	const [value, setValue] = React.useState({
-		name: "test",
-		textarea: "nfdlshfdkhsfklds",
-		fruit: "coconut"
-	});
-  
-	const handleSubmit = (e) => {
-		//   alert(`Le nom a été soumis : ${name} // ${textarea} // ${select}` );
-		console.log("alert")
-	  	e.preventDefault();
-	};
-  
-	const handleChange = (e) => {
-		const target = e.target;
-		if(target.type === "text") {
-			setValue(target.value);
-		}
-		if(target.type === "textarea") {
-			setValue(target.value);
-		}
-		if(target.name === "select") {
-			setValue(target.value)
-		}
-	};
-  
-	return (
-	  <form 
-		  onSubmit={handleSubmit} 
-		  style={{
-			  display: "flex",
-			  flexDirection: "column",
-			  width: "50%"
-		  }}>
-		<NameForm name="input" change={handleChange} value={value.name}/>
-		<EssayForm name="textarea" change={handleChange} value={value.textarea}/>
-  
-		<FlavorForm name="textarea" change={handleChange} value={value.fruit}/>
-  
-		<input type="submit" value="Envoyer" style={{width: "200px", marginTop: "1em"}}/>
-	  </form>
-	);
-  };
-  
-  const NameForm = (props) => {
-	return (
-	  <React.Fragment>
-		<label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
-		  Nom :
-		  <input type="text" value={props.value} onChange={props.change} />
-		</label>
-	  </React.Fragment>
-	);
-  };
-  
-  const EssayForm = (props) => {
+
+	const number = 25;
+	const [pokemons, setPokemon] = React.useState([]);
+	const [isLoading, setIsLoading] = React.useState(false);
+
+	React.useEffect(() => {
+		fetch(`https://pokeapi.co/api/v2/pokemon?limit=10`)
+		.then(response => response.json())
+		.then(data => setPokemon(data.results))
+	},[])
+
+	React.useEffect(() => {
+		setIsLoading(!isLoading);
+	  }, [pokemons]);
+
+
+	return(
 	
-	return (
-	  <React.Fragment>
-		<label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
-		  Essay:
-		  <textarea value={props.value} onChange={props.change} />
-		</label>
-	  </React.Fragment>
-	);
-  };
-  
-  const FlavorForm = (props) => {
-  
-	return (
-	  <React.Fragment>
-		<label>
-		  Choisissez votre parfum favori :
-		  <select name="select" value={props.value} onChange={props.change}>
-			<option value="grapefruit">Pamplemousse</option>
-			<option value="lime">Citron vert</option>
-			<option value="coconut">Noix de coco</option>
-			<option value="mango">Mangue</option>
-		  </select>
-		</label>
-	  </React.Fragment>
-	);
-  };
-
-/*
-const App = () => {
-  const [name, setName] = React.useState('');
-  const [textarea, setTextArea] = React.useState('Écrivez un essai à propos de votre élément du DOM préféré');
-  const [select, setSelect] = React.useState('coconut')
-
-  const handleSubmit = (e) => {
-    alert(`Le nom a été soumis : ${name} // ${textarea} // ${select}` );
-    e.preventDefault();
-  };
-
-  const handleChange = (e) => {
-	const targetType = e.target.type
-	if(targetType === "text") {
-		setName(e.target.value)
-	} 
-	if(targetType === "textarea") {
-		setTextArea(e.target.value)
+		<React.Fragment>
+			{isLoading && <h1>Loading...</h1>}
+			{pokemons.map((pokemon) => (
+				<PokemonCard key={pokemon.name} {...pokemon} /> // revient <PokemonCard name={pokemon.name} url={pokemon.url} />
+			))}
+			
+		</React.Fragment>
 		
-	}
-	if(e.target.name === "select") {
-		setSelect(e.target.value)
-	}
-  };
+	)
+}
 
-  return (
-    <form 
-		onSubmit={handleSubmit} 
-		style={{
-			display: "flex",
-			flexDirection: "column",
-			width: "50%"
-		}}>
-      <NameForm name="input" change={handleChange} value={name}/>
-	  <EssayForm name="textarea" change={handleChange} value={textarea}/>
+const PokemonCard = (props) => {
+	const [pokemon, setPokemon] = React.useState({});
+	const [type, setType] = React.useState("")
+	const [artwork, setArtwork] = React.useState("");
+	const [abilities, setAbilities] = React.useState([])
+	const [color, setColor] = React.useState('yellow');
+	React.useEffect(() => {
+		fetch(props.url)
+		.then(res => res.json())
+		.then(data => {
+			setPokemon(data);
+			setType(data.types[0].type.name);
+			setAbilities(data.abilities);
+			const test = data.sprites.other;
+			for(let x in test) {
+				console.log(x[2].front_default)
+			}
+		})
+	}, [])
 
-	  <FlavorForm name="textarea" change={handleChange} value={select}/>
 
-	  <input type="submit" value="Envoyer" style={{width: "200px", marginTop: "1em"}}/>
-    </form>
-  );
-};
 
-const NameForm = (props) => {
-  return (
-    <React.Fragment>
-      <label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
-        Nom :
-        <input type="text" value={props.value} onChange={props.change} />
-      </label>
-    </React.Fragment>
-  );
-};
-
-const EssayForm = (props) => {
-  
-  return (
-    <React.Fragment>
-      <label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
-        Essay:
-        <textarea value={props.value} onChange={props.change} />
-      </label>
-    </React.Fragment>
-  );
-};
-
-const FlavorForm = (props) => {
-
-  return (
-    <React.Fragment>
-      <label>
-        Choisissez votre parfum favori :
-        <select name="select" value={props.select} onChange={props.change}>
-          <option value="grapefruit">Pamplemousse</option>
-          <option value="lime">Citron vert</option>
-          <option value="coconut">Noix de coco</option>
-          <option value="mango">Mangue</option>
-        </select>
-      </label>
-    </React.Fragment>
-  );
-};
-
-*/
+	return (
+		<div className="container">
+			<div style={{backgroundColor: "green", width: "200px"}}>
+				<h5>{pokemon.name}</h5>
+				<div>
+					<img src="" />
+				</div>
+				<div>
+					{abilities.map((a, index) => (
+						<p key={index}>{a.ability.name}</p>
+					))}
+				</div>
+			</div>
+		</div>
+	)
+}
 
 ReactDOM.render(<App />, document.querySelector("#app"));
