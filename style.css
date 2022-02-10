@@ -1,6 +1,7 @@
 .container {
     background-color: #e7bf3a;
     width: 230px;
+    height: 300px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -10,3 +11,14 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+.container p, .container h6 {margin: .2em;}
+
+.container h6 {margin-top: 1em}
+
+.container h5 {margin-bottom: .5em}
+
+.green {
+    background-color: green;
+}
+
+.gray {background-color: gray;}
