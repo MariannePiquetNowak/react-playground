@@ -41,8 +41,9 @@ const PokemonCard = (props) => {
 			setPokemon(data);
 			setType(data.types[0].type.name);
 			setAbilities(data.abilities);
-			const artObj = Object.values(data.sprites.other)
-			setArtwork(artObj[2].front_default);
+			// const artObj = Object.values(data.sprites.other)
+			// setArtwork(artObj[2].front_default);
+			setArtwork(data.sprites.other["official-artwork"].front_default)
 
 		
 		})
@@ -75,6 +76,7 @@ const PokemonCard = (props) => {
 				<div style={{display: "flex", justifyContent: "space-between", margin: "0 .5em"}}>
 					<h5 style={{textTransform: "uppercase", backgroundColor: "gray", padding: ".1em 2em .1em .1em"}}>{pokemon.name}</h5>
 					<h5>{type}</h5>
+					<span>{String(pokemon.id).padStart(3, 0)}</span>
 				</div>
 				<div style={{
 					margin: "0 .5em", 
