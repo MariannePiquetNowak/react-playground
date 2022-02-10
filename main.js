@@ -17,13 +17,13 @@ const App = () => {
 
 	return(
 	
-		<React.Fragment>
+		<div style={{display: "flex", flexWrap: "wrap"}}>
 			{isLoading && <h1>Loading...</h1>}
 			{pokemons.map((pokemon) => (
 				<PokemonCard key={pokemon.name} {...pokemon} /> // revient <PokemonCard name={pokemon.name} url={pokemon.url} />
 			))}
 			
-		</React.Fragment>
+		</div>
 		
 	)
 }
@@ -56,6 +56,9 @@ const PokemonCard = (props) => {
 				break;
 			case "fire":
 				setColor('red');
+				break;
+			case "water":
+				setColor('blue');
 				break;
 		}
 	
