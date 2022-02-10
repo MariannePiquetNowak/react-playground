@@ -1,40 +1,43 @@
-const scalesNames = {
-  n: "nombre",
-  b: "binaire"
+const valNumber = {
+  d: "Decimal",
+  b: "Binary"
 }
 
 const App = () => {
+
+  const [decimal, setDecimal] = React.useState("");
+  const [binary, setBinary] = React.useState("");
+
+  const convertDecimalToBinary = (decimalNumber) => {
+    if(!isNaN(decimalNumber))
+      return (decimalNumber >>> 0).toString(2);
+    return false;
+  }
+
+  const handleChange = (e) => {
+    if(isNaN(e.target.value)) {
+      alert("Veuillez rentre un nombre")
+    }
+    setDecimal(parseInt(e.target.value));
+    setBinary(convertDecimalToBinary(decimal))
+  }
   
   return(
     <div>
-      <BaseNumberInput scale="n" />
-      <BaseNumberInput scale="b" />
+      <BaseNumberInput val={decimal} onChangeBase={handleChange}/>
+      <BaseNumberInput val={binary} onChangeBase={handleChange} />
     </div>
   )
 }
 
 const BaseNumberInput = (props) => {
 
-  const [number, setNumber] = React.useState({nombre: ""});
-
-  const handleChange = (e) => {
-    setNumber({temperature: e.target.value});
-  }
-
-  const nombre = number.nombre;
-  const scale = props.scale
-
-  function convertToBinary(nombre) {
-    if (number > 0) {
-      return convertToBinary( parseInt(number / 2) ) + (number % 2)
-    };
-    return '';
-  }
+  
 
   return (
     <React.Fragment>
-    <legend>Saisir un nombre {scalesNames[scale]}</legend>
-      <input value={nombre} onChange={handleChange} />
+    <legend>Saisir un nombre</legend>
+      <input type="text" value={props.val} onChange={props.onChangeBase} />
     </React.Fragment>
   )
 }
