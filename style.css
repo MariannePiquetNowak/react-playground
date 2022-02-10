@@ -1,11 +1,12 @@
 .container {
     background-color: #e7bf3a;
-    width: 200px;
+    width: 230px;
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 1em;
     border-radius: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 

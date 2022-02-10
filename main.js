@@ -41,22 +41,22 @@ const PokemonCard = (props) => {
 			setPokemon(data);
 			setType(data.types[0].type.name);
 			setAbilities(data.abilities);
-			const test = data.sprites.other;
-			for(let x in test) {
-				console.log(x[2].front_default)
-			}
+			// setArtwork(data.sprites.other)
+			const artObj = Object.values(data.sprites.other)
+			setArtwork(artObj[2].front_default);
+			
 		})
 	}, [])
 
 
-
 	return (
 		<div className="container">
-			<div style={{backgroundColor: "green", width: "200px"}}>
+			<div style={{backgroundColor: "green", width: "230px"}}>
 				<h5>{pokemon.name}</h5>
-				<div>
-					<img src="" />
+				<div style={{display:"flex", justifyContent:"center"}}>
+					<img style={{width: "60%"}} src={artwork} />
 				</div>
+
 				<div>
 					{abilities.map((a, index) => (
 						<p key={index}>{a.ability.name}</p>
