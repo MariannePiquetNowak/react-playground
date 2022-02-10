@@ -6,24 +6,22 @@ const App = () => {
 	});
   
 	const handleSubmit = (e) => {
-		//   alert(`Le nom a été soumis : ${name} // ${textarea} // ${select}` );
+		alert(`Le nom a été soumis : ${value.name} // ${value.textarea} // ${value.fruit}` );
 		console.log("alert")
 	  	e.preventDefault();
 	};
   
 	const handleChange = (e) => {
 		const target = e.target;
-		if(target.type === "text") {
-			setValue(target.value);
-		}
-		if(target.type === "textarea") {
-			setValue(target.value);
-		}
-		if(target.name === "select") {
-			setValue(target.value)
-		}
+		const val = target.value;
+		const name = target.name;
+
+		setValue({
+			...value,
+			[name]: val
+		})
 	};
-  
+
 	return (
 	  <form 
 		  onSubmit={handleSubmit} 
@@ -32,10 +30,10 @@ const App = () => {
 			  flexDirection: "column",
 			  width: "50%"
 		  }}>
-		<NameForm name="input" change={handleChange} value={value.name}/>
-		<EssayForm name="textarea" change={handleChange} value={value.textarea}/>
+		<NameForm  change={handleChange} value={value.name}/>
+		<EssayForm  change={handleChange} value={value.textarea}/>
   
-		<FlavorForm name="textarea" change={handleChange} value={value.fruit}/>
+		<FlavorForm  change={handleChange} value={value.fruit}/>
   
 		<input type="submit" value="Envoyer" style={{width: "200px", marginTop: "1em"}}/>
 	  </form>
@@ -47,7 +45,7 @@ const App = () => {
 	  <React.Fragment>
 		<label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
 		  Nom :
-		  <input type="text" value={props.value} onChange={props.change} />
+		  <input name="name" type="text" value={props.value} onChange={props.change} />
 		</label>
 	  </React.Fragment>
 	);
@@ -59,7 +57,7 @@ const App = () => {
 	  <React.Fragment>
 		<label style={{display: "flex", flexDirection: "column", marginTop: "1em"}}>
 		  Essay:
-		  <textarea value={props.value} onChange={props.change} />
+		  <textarea name="textarea" type="textarea" value={props.value} onChange={props.change} />
 		</label>
 	  </React.Fragment>
 	);
@@ -71,7 +69,7 @@ const App = () => {
 	  <React.Fragment>
 		<label>
 		  Choisissez votre parfum favori :
-		  <select name="select" value={props.value} onChange={props.change}>
+		  <select name="fruit" value={props.value} onChange={props.change}>
 			<option value="grapefruit">Pamplemousse</option>
 			<option value="lime">Citron vert</option>
 			<option value="coconut">Noix de coco</option>
