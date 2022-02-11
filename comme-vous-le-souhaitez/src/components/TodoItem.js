@@ -9,9 +9,9 @@ console.log(props)
       {props.todos.map((item) => (
         <div key={item.id} className={props.class}>
           <span>Todo N° {item.id}</span> 
-          {checked ? <h4 style={{textDecoration: "line-through"}}>{item.title}</h4> : <h4>{item.title}</h4> }
-          
 
+          {checked ? <h4 style={{textDecoration: "line-through", color: "gray"}}>{item.title}</h4> : <h4>{item.title}</h4> }
+        
           <input onChange={onChange} id="check" type="checkbox" name="complete" />
           
           <div className="btn-container">

@@ -25,14 +25,18 @@ function App() {
 
   }, [newTodo])
 
-
   const handleClick = (e) => {
     switch(e.target.name) {
       case "edit":
+        console.log("edit");
         
+
+        // Si isEdit est à true, alors on affiche un input qui modifie le titre
         break;
       case "delete": 
         console.log("delete");
+      
+
         break;
       default: 
         return;
@@ -63,9 +67,12 @@ function App() {
   const handleChange = (e) => {
 
     const title = e.target.value;
-    const val = e.target.type === "checkbox" ? e.target.checked : title;
+    
+    if(e.target.type === "checkbox"){
+      e.target.checked = true
+    } 
 
-    setNewTodo(prevstate => ({...prevstate, title, isCompleted: val}));
+    setNewTodo(prevstate => ({...prevstate, title, isCompleted: e.target.checked}));
   }
 
   return (
