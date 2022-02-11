@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ handleKeyEnter, onChange, ...props }) => {
+const TodoList = ({ handleKeyEnter, onChange, checked, ...props }) => {
   return (
     <div style={{ width: "400px" }}>
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -12,7 +12,7 @@ const TodoList = ({ handleKeyEnter, onChange, ...props }) => {
           onKeyDown={handleKeyEnter}
         />
       </div>
-      <TodoItem onChange={onChange} click={props.click} todos={props.todos} class={props.class}/> 
+      <TodoItem checked={checked} onChange={onChange} click={props.click} todos={props.todos} class={props.class}/> 
     </div>
   );
 };

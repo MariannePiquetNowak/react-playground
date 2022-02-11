@@ -14,7 +14,6 @@ function App() {
 
   const [newTodo, setNewTodo] = useState(todoModel);
   const [todos, setTodos] = useState([]);
-  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     console.log('useEffect todos',todos)
@@ -84,6 +83,7 @@ function App() {
         todos={todos}
         class="todos"
         click={handleClick}
+        checked={newTodo.isCompleted}
         >
         Entrer votre titre de todo
       </TodoList>

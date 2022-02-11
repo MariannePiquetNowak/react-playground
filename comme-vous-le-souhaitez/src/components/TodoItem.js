@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
-const TodoItem = ({onChange, ...props}) => {
-
+const TodoItem = ({onChange, checked, ...props}) => {
+console.log(props)
 
   return (
     <Fragment>
@@ -9,7 +9,8 @@ const TodoItem = ({onChange, ...props}) => {
       {props.todos.map((item) => (
         <div key={item.id} className={props.class}>
           <span>Todo N° {item.id}</span> 
-          <h4>{item.title}</h4> 
+          {checked ? <h4 style={{textDecoration: "line-through"}}>{item.title}</h4> : <h4>{item.title}</h4> }
+          
 
           <input onChange={onChange} id="check" type="checkbox" name="complete" />
           
