@@ -23,6 +23,18 @@ function App() {
     console.log('useEffect newTodo',newTodo)
   }, [newTodo])
 
+  const handleClick = (e) => {
+    switch(e.target.name) {
+      case "edit":
+        
+        break;
+      case "delete": 
+        console.log("delete");
+        break;
+    }
+
+  }
+
 
   const handleKeyEnter = (e) => {
     switch(e.key) {
@@ -31,7 +43,7 @@ function App() {
           ...prevState,
           newTodo
         ])
-        setNewTodo({...todoModel, id: ++todoModel.id})
+        setNewTodo({...todoModel, id: ++todoModel.id, isCompleted: true})
         // setNewTodo(Object.assign({}, todoModel, {id: ++todoModel.id}))
         // setNewTodo(prevState => ({...prevState, id: prevState.id+1, title: ""}))
         break;
@@ -64,6 +76,7 @@ function App() {
         handleKeyEnter={handleKeyEnter}
         todos={todos}
         class="todos"
+        click={handleClick}
         >
         Entrer votre titre de todo
       </TodoList>

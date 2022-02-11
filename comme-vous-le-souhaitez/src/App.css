@@ -16,7 +16,39 @@
   justify-content: center;
 }
 
-
 .todos h4 {
   margin: 0;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+  margin: .5em;
+}
+.btn-container  button {
+  border: none;
+  border-radius: 5px;
+  transition: all .2s ease-in-out;
+
+}
+
+.btn-container  button:first-child {
+  background-color: green;
+}
+.btn-container  button:last-child {
+  background-color: orangered;
+}
+.btn-container  button:last-child:hover {
+  background-color: rgb(255, 0, 0);
+  cursor: pointer;
+}
+
+.btn-container  button:first-child:hover {
+  background-color: rgb(5, 196, 5);
+  cursor: pointer;
+}
+
+.btn-container svg {
+  width: 20px;
+  height: 20px;
 }

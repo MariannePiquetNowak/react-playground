@@ -1,8 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
+import TodoItem from "./TodoItem";
 
 const TodoList = ({ handleKeyEnter, onChange, ...props }) => {
   return (
-    <div style={{ width: "30%" }}>
+    <div style={{ width: "400px" }}>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <label>{props.children}</label>
         <input
@@ -11,13 +12,7 @@ const TodoList = ({ handleKeyEnter, onChange, ...props }) => {
           onKeyDown={handleKeyEnter}
         />
       </div>
-      <h4>Liste des todos</h4>
-      {props.todos.map((item) => (
-        <div className={props.class}>
-        <span>Todo N° {item.id}</span> 
-        <h4>{item.title}</h4> 
-        </div>
-      ))}
+      <TodoItem click={props.click} todos={props.todos} class={props.class}/> 
     </div>
   );
 };
