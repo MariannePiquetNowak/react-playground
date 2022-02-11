@@ -14,14 +14,18 @@ function App() {
 
   const [newTodo, setNewTodo] = useState(todoModel);
   const [todos, setTodos] = useState([]);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     console.log('useEffect todos',todos)
+
   }, [todos]);
 
   useEffect(() => {
     console.log('useEffect newTodo',newTodo)
+
   }, [newTodo])
+
 
   const handleClick = (e) => {
     switch(e.target.name) {
@@ -31,10 +35,10 @@ function App() {
       case "delete": 
         console.log("delete");
         break;
+      default: 
+        return;
     }
-
   }
-
 
   const handleKeyEnter = (e) => {
     switch(e.key) {
@@ -43,7 +47,7 @@ function App() {
           ...prevState,
           newTodo
         ])
-        setNewTodo({...todoModel, id: ++todoModel.id, isCompleted: true})
+        setNewTodo({...todoModel, id: ++todoModel.id})
         // setNewTodo(Object.assign({}, todoModel, {id: ++todoModel.id}))
         // setNewTodo(prevState => ({...prevState, id: prevState.id+1, title: ""}))
         break;
@@ -58,8 +62,11 @@ function App() {
   }
 
   const handleChange = (e) => {
+
     const title = e.target.value;
-    setNewTodo(prevstate => ({...prevstate, title}));
+    const val = e.target.type === "checkbox" ? e.target.checked : title;
+
+    setNewTodo(prevstate => ({...prevstate, title, isCompleted: val}));
   }
 
   return (

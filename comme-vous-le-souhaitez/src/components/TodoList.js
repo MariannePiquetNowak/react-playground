@@ -12,7 +12,7 @@ const TodoList = ({ handleKeyEnter, onChange, ...props }) => {
           onKeyDown={handleKeyEnter}
         />
       </div>
-      <TodoItem click={props.click} todos={props.todos} class={props.class}/> 
+      <TodoItem onChange={onChange} click={props.click} todos={props.todos} class={props.class}/> 
     </div>
   );
 };
