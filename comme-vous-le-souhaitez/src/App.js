@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import { useState } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 
 function App() {
 
@@ -11,10 +11,41 @@ function App() {
         isEditing: false
   });
 
+
   const handleKeyEnter = (e) => {
-    if(e.key === "Enter") {
-      console.log('validate')
+    switch(e.key) {
+      case "Enter": 
+      setNewTodo({
+        id: 1,
+        title: "",
+        isCompleted: true,
+        isEditing: false
+      })
+      alert(`votre titre ${newTodo.title} a bien été envoyé`)
+      console.log(newTodo)
+        break;
+      case "Escape":
+        setNewTodo({
+          id: 0, 
+          title: "",
+          isCompleted: false, 
+          isEditing: false
+        });
+        console.log(newTodo)
+        break;
+      default: 
+        return;
     }
+  }
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setNewTodo({
+      id: 1,
+      title: val,
+      isCompleted: true, 
+      isEditing: false
+    })
   }
 
   return (
@@ -24,14 +55,18 @@ function App() {
         - le composant qui affiche les filtres
         - La liste des todos 
       */}
-      <Input handleKeyEnter={handleKeyEnter} />
+      <Input type="text" onChange={handleChange} val={newTodo.title} handleKeyEnter={handleKeyEnter}>Entrer votre titre de todo</Input>
     </div>
   );
 }
 
-const Input = ({handleKeyEnter, ...props}) => {
+const Input = ({handleKeyEnter, onChange, ...props}) => {
   return (
-    <input onKeyPress={handleKeyEnter}/>
+    <Fragment>
+      <label>{props.children}</label>
+      <input onChange={onChange} value={props.val} onKeyDown={handleKeyEnter}/>
+    </Fragment>
+    
   )
 }
 
