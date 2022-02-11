@@ -1,51 +1,53 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import { useState, Fragment, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import TodoList from "./components/TodoList";
+
+const todoModel = {
+  id: 1,
+  title: '',
+  isCompleted : false,
+  isEditing: false
+}
 
 function App() {
 
-  const [newTodo, setNewTodo] = useState({
-        id: 1,
-        title: 'ma super tâche',
-        isCompleted : false,
-        isEditing: false
-  });
+  const [newTodo, setNewTodo] = useState(todoModel);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    console.log('useEffect todos',todos)
+  }, [todos]);
+
+  useEffect(() => {
+    console.log('useEffect newTodo',newTodo)
+  }, [newTodo])
 
 
   const handleKeyEnter = (e) => {
     switch(e.key) {
       case "Enter": 
-      setNewTodo({
-        id: 1,
-        title: "",
-        isCompleted: true,
-        isEditing: false
-      })
-      alert(`votre titre ${newTodo.title} a bien été envoyé`)
-      console.log(newTodo)
+        setTodos(prevState => [
+          ...prevState,
+          newTodo
+        ])
+        setNewTodo({...todoModel, id: ++todoModel.id})
+        // setNewTodo(Object.assign({}, todoModel, {id: ++todoModel.id}))
+        // setNewTodo(prevState => ({...prevState, id: prevState.id+1, title: ""}))
         break;
+
       case "Escape":
-        setNewTodo({
-          id: 0, 
-          title: "",
-          isCompleted: false, 
-          isEditing: false
-        });
-        console.log(newTodo)
+        setNewTodo(todoModel);
         break;
+
       default: 
         return;
     }
   }
 
   const handleChange = (e) => {
-    const val = e.target.value;
-    setNewTodo({
-      id: 1,
-      title: val,
-      isCompleted: true, 
-      isEditing: false
-    })
+    const title = e.target.value;
+    setNewTodo(prevstate => ({...prevstate, title}));
   }
 
   return (
@@ -55,19 +57,18 @@ function App() {
         - le composant qui affiche les filtres
         - La liste des todos 
       */}
-      <Input type="text" onChange={handleChange} val={newTodo.title} handleKeyEnter={handleKeyEnter}>Entrer votre titre de todo</Input>
+      <TodoList 
+        type="text" 
+        onChange={handleChange} 
+        val={newTodo.title} 
+        handleKeyEnter={handleKeyEnter}
+        todos={todos}
+        class="todos"
+        >
+        Entrer votre titre de todo
+      </TodoList>
     </div>
   );
-}
-
-const Input = ({handleKeyEnter, onChange, ...props}) => {
-  return (
-    <Fragment>
-      <label>{props.children}</label>
-      <input onChange={onChange} value={props.val} onKeyDown={handleKeyEnter}/>
-    </Fragment>
-    
-  )
 }
 
 export default App;
